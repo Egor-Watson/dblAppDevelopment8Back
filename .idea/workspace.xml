@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="e2276db6-4fd3-46aa-b36e-8aa6f85ba6ae" name="Changes" comment="Implemented basic listings API.">
+    <list default="true" id="e2276db6-4fd3-46aa-b36e-8aa6f85ba6ae" name="Changes" comment="Upload static.">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/DBLAppBackend/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/DBLAppBackend/settings.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -73,7 +74,7 @@
       <workItem from="1645190668120" duration="32000" />
       <workItem from="1645190702562" duration="43000" />
       <workItem from="1645190750214" duration="43000" />
-      <workItem from="1645190795628" duration="763000" />
+      <workItem from="1645190795628" duration="1378000" />
     </task>
     <task id="LOCAL-00001" summary="Initial commit.">
       <created>1645188177315</created>
@@ -89,7 +90,21 @@
       <option name="project" value="LOCAL" />
       <updated>1645189811861</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Updated static.">
+      <created>1645193427013</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1645193427013</updated>
+    </task>
+    <task id="LOCAL-00004" summary="Upload static.">
+      <created>1645193477293</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1645193477293</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -110,6 +125,8 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Initial commit." />
     <MESSAGE value="Implemented basic listings API." />
-    <option name="LAST_COMMIT_MESSAGE" value="Implemented basic listings API." />
+    <MESSAGE value="Updated static." />
+    <MESSAGE value="Upload static." />
+    <option name="LAST_COMMIT_MESSAGE" value="Upload static." />
   </component>
 </project>
