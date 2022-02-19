@@ -27,8 +27,18 @@ SECRET_KEY = 'django-insecure-&j9f5zwk4@1kenx7-oq+o!xtr0gro1f$#l0-hgtp3fy-!&la(f
 DEBUG = True
 
 ALLOWED_HOSTS = [
-    'dbl8-app.herokuapp.com'
+    'dbl8-app.herokuapp.com',
+    '127.0.0.1',
+    '192.168.223.1'
 ]
+
+REST_FRAMEWORK = {
+    # Use Django's standard `django.contrib.auth` permissions,
+    # or allow read-only access for unauthenticated users.
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
+    ]
+}
 
 
 # Application definition
