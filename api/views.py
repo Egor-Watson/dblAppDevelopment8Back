@@ -1,4 +1,4 @@
-from rest_framework import viewsets
+from django.shortcuts import render
 
 from .serializers import ListingSerializer, UserSerializer
 from .models import Listing
@@ -35,3 +35,7 @@ class UserList(generics.ListAPIView):
 class UserDetail(generics.RetrieveAPIView):
     queryset = User.objects.all()
     serializer_class = UserSerializer
+
+
+def homepage(request):
+    return render(request, 'homepage.html')
