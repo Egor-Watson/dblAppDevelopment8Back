@@ -11,6 +11,7 @@ urlpatterns = [
     path('listings/<int:pk>', views.ListingDetail.as_view()),
     path('users/', views.UserList.as_view()),
     path('users/<int:pk>/', views.UserDetail.as_view()),
+    path('api/auth/', views.AuthenticatedView.as_view()),
 ]
 
 urlpatterns = format_suffix_patterns(urlpatterns)
