@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from .models import Listing
+from .models import Listing, ExtraUserInformation
 
 from django.contrib.auth.models import User
 
@@ -11,12 +11,15 @@ class ListingSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Listing
-        fields = ['id', 'name', 'description', 'owner', 'image']
+        fields = ['id', 'name', 'description', 'category', 'similar_items', 'location', 'owner', 'image1', 'image2',
+                  'image3', 'image4', 'offers']
         # fields = ['id', 'name', 'description', 'image']
 
 
 class UserSerializer(serializers.ModelSerializer):
     listings = serializers.PrimaryKeyRelatedField(many=True, queryset=Listing.objects.all())
+    # The below doesnt work for displaying the extra user info
+    # extra_info = serializers.PrimaryKeyRelatedField(many=True, queryset=ExtraUserInformation.objects.all())
 
     password = serializers.CharField(write_only=True)
 
