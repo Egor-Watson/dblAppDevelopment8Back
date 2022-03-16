@@ -1,6 +1,7 @@
 from django.contrib import admin
-from .models import Listing, Offer
+from .models import Listing, ExtraUserInformation
 # Register your models here.
 
 admin.site.register(Listing)
-admin.site.register(Offer)
+admin.site.register(ExtraUserInformation)
+
