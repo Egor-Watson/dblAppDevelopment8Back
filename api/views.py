@@ -2,8 +2,8 @@ from django.shortcuts import render
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
-from .serializers import ListingSerializer, UserSerializer
-from .models import Listing
+from .serializers import ListingSerializer, UserSerializer, ExtraUserInformationSerializer
+from .models import Listing, ExtraUserInformation
 from rest_framework import generics, permissions
 
 from django.contrib.auth.models import User
@@ -49,6 +49,20 @@ class AuthenticatedView(APIView):
     def get(self, request):
         msg = {'message': f'Hi {request.user.username}! Congratulations on being authenticated!'}
         return Response(msg, status=status.HTTP_200_OK)
+
+
+class ExtraUserInformationList(generics.ListCreateAPIView):
+
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+
+    queryset = ExtraUserInformation.objects.all()
+    serializer_class = ExtraUserInformationSerializer
+
+
+class ExtraUserInformationDetail(generics.RetrieveUpdateDestroyAPIView):
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+    queryset = ExtraUserInformation.objects.all()
+    serializer_class = ExtraUserInformationSerializer
 
 
 def homepage(request):
