@@ -13,13 +13,25 @@ class ListingSerializer(serializers.ModelSerializer):
         model = Listing
         fields = ['id', 'name', 'description', 'category', 'similar_items', 'location', 'owner', 'image1', 'image2',
                   'image3', 'image4', 'offers']
-        # fields = ['id', 'name', 'description', 'image']
+
+
+class ExtraUserInformationSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = ExtraUserInformation
+        fields = ['user', 'is_admin', 'is_reported']
 
 
 class UserSerializer(serializers.ModelSerializer):
     listings = serializers.PrimaryKeyRelatedField(many=True, queryset=Listing.objects.all())
     # The below doesnt work for displaying the extra user info
-    # extra_info = serializers.PrimaryKeyRelatedField(many=True, queryset=ExtraUserInformation.objects.all())
+    # extrauserinformations = serializers.PrimaryKeyRelatedField(
+    #     many=False,
+    #     read_only=False,
+    #     queryset=ExtraUserInformation.objects.all()
+    # )
+
+    # extrauserinformations = ExtraUserInformationSerializer(many=True)
 
     password = serializers.CharField(write_only=True)
 
@@ -36,3 +48,4 @@ class UserSerializer(serializers.ModelSerializer):
         model = User
         fields = ['id', 'username', 'password', 'listings', 'last_login']
         # fields = ['id', 'username', 'password', 'last_login']
+
