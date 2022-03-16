@@ -42,10 +42,10 @@ class Listing(models.Model):
 
     owner = models.ForeignKey(User, related_name='listings', on_delete=models.CASCADE)
 
-    image1 = models.CharField(max_length=200, blank=True, null=True)
-    image2 = models.CharField(max_length=200, blank=True, null=True)
-    image3 = models.CharField(max_length=200, blank=True, null=True)
-    image4 = models.CharField(max_length=200, blank=True, null=True)
+    image1 = models.TextField(blank=True, null=True)
+    image2 = models.TextField(blank=True, null=True)
+    image3 = models.TextField(blank=True, null=True)
+    image4 = models.TextField(blank=True, null=True)
 
     offers = models.ManyToManyField('self', null=True, blank=True, symmetrical=False)
 
