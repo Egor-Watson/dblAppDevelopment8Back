@@ -28,6 +28,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = [
     'dbl8-app.herokuapp.com',
+    'dbl8-app2.herokuapp.com',
     '127.0.0.1',
     '192.168.223.1'
 ]
