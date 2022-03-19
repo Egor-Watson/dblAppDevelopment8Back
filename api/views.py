@@ -1,4 +1,5 @@
-from django.shortcuts import render
+from django.http import FileResponse
+from django.shortcuts import render, HttpResponse
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
@@ -11,6 +12,9 @@ from .permissions import IsOwnerOrReadOnly
 
 from rest_framework.permissions import IsAuthenticated
 from rest_framework import status
+
+import os
+import mimetypes
 
 
 
@@ -68,3 +72,15 @@ class ExtraUserInformationDetail(generics.RetrieveUpdateDestroyAPIView):
 
 def homepage(request):
     return render(request, 'homepage.html')
+
+
+# Lets user download APK
+def downloadAPK(request):
+
+    BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    filename = 'RublixApp.apk'
+    filepath = BASE_DIR + '/api/Files/' + filename
+
+    # Provide file
+    response = FileResponse(open(filepath, 'rb'))
+    return response

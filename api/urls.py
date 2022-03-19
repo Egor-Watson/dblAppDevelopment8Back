@@ -1,6 +1,6 @@
 from django.urls import path
 from . import views
-from .views import homepage
+from .views import homepage, downloadAPK
 from rest_framework.urlpatterns import format_suffix_patterns
 
 # Wire up our API using automatic URL routing.
@@ -14,6 +14,7 @@ urlpatterns = [
     path('extrauserinformation/', views.ExtraUserInformationList.as_view()),
     path('extrauserinformation/<int:pk>/', views.ExtraUserInformationDetail.as_view()),
     path('api/auth/', views.AuthenticatedView.as_view()),
+    path('downloadAPK/', downloadAPK)
     # path('auth/', include('rest_framework_social_oauth2.urls'))
 ]
 
