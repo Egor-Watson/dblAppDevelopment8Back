@@ -24,6 +24,7 @@ class ExtraUserInformation(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     is_admin = models.BooleanField(default=False)
     is_reported = models.BooleanField(default=False)
+    is_banned = models.BooleanField(default=False)
 
     def __str__(self):
         return 'Info for {}'.format(self.user.username)
