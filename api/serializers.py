@@ -19,7 +19,7 @@ class ExtraUserInformationSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = ExtraUserInformation
-        fields = ['user', 'is_admin', 'is_reported', 'is_banned']
+        fields = ['id', 'user', 'is_admin', 'is_reported', 'is_banned']
 
 
 class UserSerializer(serializers.ModelSerializer):
