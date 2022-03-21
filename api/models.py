@@ -21,7 +21,7 @@ from django.contrib.auth.models import User
 #         return '{} from {}'.format(self.item.name, self.owner.username)
 
 class ExtraUserInformation(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
     is_admin = models.BooleanField(default=False)
     is_reported = models.BooleanField(default=False)
     is_banned = models.BooleanField(default=False)
