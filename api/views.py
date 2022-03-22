@@ -52,7 +52,13 @@ class AuthenticatedView(APIView):
     permission_classes = [IsAuthenticated, ]
 
     def get(self, request):
-        msg = {'message': f'Hi {request.user.username}! Congratulations on being authenticated!'}
+        # Respond with user's id and is_banned flag
+        id = request.user.id
+        extra_info = ExtraUserInformation.objects.get(pk=id)
+
+        # if successful login respond with user's flags
+        msg = {'id': id, 'is_banned': extra_info.is_banned, 'is_admin': extra_info.is_admin}
+
         return Response(msg, status=status.HTTP_200_OK)
 
 
