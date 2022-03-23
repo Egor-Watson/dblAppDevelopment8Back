@@ -39,8 +39,8 @@ class Listing(models.Model):
     similar_items = models.TextField(max_length=300, default='item')
 
     # items location
-    longitude = models.CharField(max_length=7, default="0")
-    latitude = models.CharField(max_length=7, default="0")
+    longitude = models.CharField(max_length=7, blank=True, null=True)
+    latitude = models.CharField(max_length=7, blank=True, null=True)
 
 
     owner = models.ForeignKey(User, related_name='listings', on_delete=models.CASCADE)
