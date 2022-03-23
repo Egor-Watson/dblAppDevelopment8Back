@@ -38,8 +38,10 @@ class Listing(models.Model):
     # enter similar items seperated by , e.g.: "Fruits, Vegetables, item"
     similar_items = models.TextField(max_length=300, default='item')
 
-    # entered as "12.12345, 12.12345"
-    location = models.CharField(max_length=30, default='location')
+    # items location
+    longitude = models.CharField(max_length=7, default="0")
+    latitude = models.CharField(max_length=7, default="0")
+
 
     owner = models.ForeignKey(User, related_name='listings', on_delete=models.CASCADE)
 
