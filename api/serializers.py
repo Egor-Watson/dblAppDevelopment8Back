@@ -11,8 +11,8 @@ class ListingSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Listing
-        fields = ['id', 'name', 'description', 'category', 'similar_items', 'location', 'owner', 'image1', 'image2',
-                  'image3', 'image4', 'offers']
+        fields = ['id', 'name', 'description', 'category', 'similar_items', 'latitude', 'longitude', 'owner',
+                  'image1', 'image2', 'image3', 'image4', 'offers']
 
 
 class ExtraUserInformationSerializer(serializers.ModelSerializer):
