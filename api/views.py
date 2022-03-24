@@ -30,7 +30,7 @@ class ListingList(generics.ListCreateAPIView):
 
 
 class ListingDetail(generics.RetrieveUpdateDestroyAPIView):
-    permission_classes = [permissions.IsAuthenticatedOrReadOnly, IsOwnerOrReadOnly]
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
     queryset = Listing.objects.all()
     serializer_class = ListingSerializer
 
