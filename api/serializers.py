@@ -52,6 +52,7 @@ class UserSerializer(serializers.ModelSerializer):
     def update(self, instance, validated_data):
 
         print(instance)
+        instance.set_username(validated_data['username'])
         instance.set_password(validated_data['password'])
         instance.save()
 
