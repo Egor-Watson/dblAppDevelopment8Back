@@ -51,6 +51,7 @@ class UserSerializer(serializers.ModelSerializer):
     # update method for proper password posting
     def update(self, instance, validated_data):
 
+        print(instance)
         instance.set_password(validated_data['password'])
         instance.save()
 
