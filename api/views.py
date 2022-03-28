@@ -1,10 +1,10 @@
-from django.http import FileResponse
+from django.http import FileResponse, JsonResponse
 from django.shortcuts import render, HttpResponse
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
-from .serializers import ListingSerializer, UserSerializer, ExtraUserInformationSerializer
-from .models import Listing, ExtraUserInformation
+from .serializers import ListingSerializer, UserSerializer, ExtraUserInformationSerializer, OfferSerializer
+from .models import Listing, ExtraUserInformation, Offer
 from rest_framework import generics, permissions
 
 from django.contrib.auth.models import User
@@ -76,6 +76,23 @@ class ExtraUserInformationDetail(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = ExtraUserInformationSerializer
 
 
+class OfferList(generics.ListCreateAPIView):
+
+    def perform_create(self, serializer):
+        serializer.save(owner=self.request.user)
+
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+
+    queryset = Offer.objects.all()
+    serializer_class = OfferSerializer
+
+
+class OfferDetail(generics.RetrieveUpdateDestroyAPIView):
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+    queryset = Offer.objects.all()
+    serializer_class = OfferSerializer
+
+
 def homepage(request):
     return render(request, 'homepage.html')
 
@@ -90,3 +107,34 @@ def downloadAPK(request):
     # Provide file
     response = FileResponse(open(filepath, 'rb'))
     return response
+
+
+def arrayTest(request, a):
+    # theArray = request.GET.get('array', '')
+    list = a.split(',')
+    int_list = []
+
+    # convert string ints to ints
+    for l in list:
+        int_list.append(int(l))
+
+    Listings_list = []
+
+    for i in int_list:
+        Listings_list.append(Listing.objects.get(pk=i))
+
+
+    print(ListingSerializer(Listings_list, many=True).data)
+
+    data = ListingSerializer(Listings_list, many=True).data
+    # serializer_class = ExtraUserInformationSerializer
+    # return HttpResponse(ListingSerializer(Listings_list[0]).data)
+    return JsonResponse(data)
+
+class arrayTest2(APIView):
+    queryset = Listing.objects.all()
+
+    def get(self, request, format=None):
+
+        usernames = [user.username for user in User.objects.all()]
+        return Response(usernames)

@@ -1,19 +1,11 @@
 from rest_framework import serializers
 
-from .models import Listing, ExtraUserInformation
+from .models import Listing, ExtraUserInformation, Offer
 
 from django.contrib.auth.models import User
 
 
-# Serializers from official page:
-class ListingSerializer(serializers.ModelSerializer):
-    owner = serializers.ReadOnlyField(source='owner.username')
-    owner_id = serializers.ReadOnlyField(source='owner.id')
 
-    class Meta:
-        model = Listing
-        fields = ['id', 'name', 'description', 'category', 'similar_items', 'latitude', 'longitude', 'owner',
-                  'owner_id', 'image1', 'image2', 'image3', 'image4', 'offers']
 
 
 class ExtraUserInformationSerializer(serializers.ModelSerializer):
@@ -60,4 +52,29 @@ class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = ['id', 'username', 'password', 'first_name', 'last_name', 'email', 'listings']
+
+# Modified user serializer to be without listings so can be displayed in Listings
+class UserForListingSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ['id', 'username', 'email']
+
+# Serializers from official page:
+class ListingSerializer(serializers.ModelSerializer):
+    owner = UserForListingSerializer()
+    owner_id = serializers.ReadOnlyField(source='owner.id')
+
+    class Meta:
+        model = Listing
+        fields = ['id', 'name', 'description', 'category', 'similar_items', 'latitude', 'longitude', 'owner',
+                  'owner_id', 'image1', 'image2', 'image3', 'image4', 'offers', 'archived', 'featured']
+
+
+class OfferSerializer(serializers.ModelSerializer):
+    owner = UserSerializer()
+    owner_id = serializers.ReadOnlyField(source='owner.id')
+
+    class Meta:
+        model = Offer
+        fields = ['id', 'offering', 'offer_for', 'owner_id', 'owner', 'status']
 

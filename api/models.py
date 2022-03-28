@@ -2,23 +2,24 @@ from django.db import models
 from django.contrib.auth.models import User
 
 
-# class Offer(models.Model):
-#     offer_choices = (
-#         ('P', 'Pending'),
-#         ('A', 'Accepted'),
-#         ('D', 'Declined')
-#     )
-#     # TODO: ensure offering and listings are different
-#     # item offered for a listing
-#     item = models.ForeignKey('Listing', on_delete=models.CASCADE)
-#     # listing = models.ForeignKey(Listing, on_delete=models.CASCADE, related_name='offering_listing')
-#     owner = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
-#
-#     date_made = models.DateField(auto_created=True)
-#     status = models.CharField(choices=offer_choices, max_length=1)
-#
-#     def __str__(self):
-#         return '{} from {}'.format(self.item.name, self.owner.username)
+class Offer(models.Model):
+    offer_choices = (
+        ('P', 'Pending'),
+        ('A', 'Accepted'),
+        ('D', 'Declined')
+    )
+    # TODO: ensure offering and listings are different
+    # item offered for a listing
+    offering = models.ForeignKey('Listing', on_delete=models.CASCADE)
+    offer_for = models.ForeignKey('Listing', on_delete=models.CASCADE, related_name='offerFor_listing')
+
+    owner = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
+
+    date_made = models.DateField(auto_created=True)
+    status = models.CharField(choices=offer_choices, max_length=1)
+
+    def __str__(self):
+        return '{} from {}'.format(self.offering.name, self.owner.username)
 
 class ExtraUserInformation(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
@@ -51,6 +52,10 @@ class Listing(models.Model):
     image4 = models.TextField(blank=True, null=True)
 
     offers = models.ManyToManyField('self', null=True, blank=True, symmetrical=False)
+
+    featured = models.BooleanField(default=False)
+
+    archived = models.BooleanField(default=False)
 
     def __str__(self):
         return self.name
