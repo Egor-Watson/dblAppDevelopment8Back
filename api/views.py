@@ -101,7 +101,7 @@ class OfferList(generics.ListCreateAPIView):
         offered_for = self.request.query_params.get('offered_for')
 
         if offered_for is not None:
-            queryset = queryset.filter(offer_for=offered_for)
+            queryset = queryset.filter(offer_for_id=offered_for)
 
         return queryset
 
