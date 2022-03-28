@@ -15,7 +15,7 @@ class Offer(models.Model):
 
     owner = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
 
-    date_made = models.DateField(auto_created=True)
+    date_made = models.DateField(auto_now_add=True)
     status = models.CharField(choices=offer_choices, max_length=1)
 
     def __str__(self):
