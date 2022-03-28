@@ -69,9 +69,18 @@ class ListingSerializer(serializers.ModelSerializer):
         fields = ['id', 'name', 'description', 'category', 'similar_items', 'latitude', 'longitude', 'owner',
                   'owner_id', 'image1', 'image2', 'image3', 'image4', 'offers', 'archived', 'featured']
 
+# modified listing serailizer for offers
+class ListingForOffersSerializer(serializers.ModelSerializer):
+    owner = UserForListingSerializer()
+
+    class Meta:
+        model = Listing
+        fields = ['id', 'name', 'owner', 'image1']
 
 class OfferSerializer(serializers.ModelSerializer):
     owner = UserSerializer()
+    offering = ListingForOffersSerializer()
+    offer_for = ListingForOffersSerializer()
     owner_id = serializers.ReadOnlyField(source='owner.id')
 
     class Meta:
