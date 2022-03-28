@@ -89,12 +89,25 @@ class OfferSerializer(serializers.ModelSerializer):
     # offering = ListingForOffersSerializer()
     # offer_for = ListingForOffersSerializer()
 
-    offering_id = serializers.IntegerField(source='offering.id')
-    offer_for_id = serializers.IntegerField(source='offer_for.id')
-    owner_id = serializers.IntegerField(source='owner.id')
+    # def create(self, validated_data):
+    #     print(validated_data)
+    #
+    #     offering = Offer.objects.create(
+    #         owner=validated_data['owner'],
+    #         offering=validated_data['offering'],
+    #         offer_for=validated_data['offer_for'],
+    #         status=validated_data['status']
+    #     )
+    #
+    #     return offering
+
+    # offering_id = serializers.IntegerField(source='offering_id')
+    # offer_for_id = serializers.IntegerField(source='offer_for_id')
+    # owner_id = serializers.IntegerField(source='owner')
 
     class Meta:
         model = Offer
-        read_only_fields = ['owner', 'offering', 'offer_for']
-        fields = ['id', 'owner_id', 'status', 'offering_id', 'offer_for_id', 'owner_id']
+        # read_only_fields = ['owner', 'offering', 'offer_for']
+        # fields = ['id', 'owner_id', 'status', 'offering_id', 'offer_for_id', 'owner_id']
+        fields = ['id', 'owner', 'offering', 'offer_for', 'status']
 
