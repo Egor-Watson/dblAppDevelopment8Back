@@ -26,7 +26,7 @@ class ListingList(generics.ListCreateAPIView):
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
 
 
-
+    # to filter append ?owner_id=X to end of url
     def get_queryset(self):
         queryset = Listing.objects.all()
 
@@ -94,6 +94,7 @@ class OfferList(generics.ListCreateAPIView):
 
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
 
+    # to filter append ?offered_for=X to end of url
     def get_queryset(self):
         queryset = Offer.objects.all()
 
