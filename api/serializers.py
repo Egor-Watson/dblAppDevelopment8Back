@@ -73,7 +73,7 @@ class ListingSerializer(serializers.ModelSerializer):
 class UserForOfferSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ['id', 'username', 'email']
+        fields = ['id', 'username', 'first_name', 'last_name', 'email']
 
 # modified listing serailizer for offers
 class ListingForOffersSerializer(serializers.ModelSerializer):
@@ -84,12 +84,17 @@ class ListingForOffersSerializer(serializers.ModelSerializer):
         fields = ['id', 'name', 'owner', 'image1']
 
 class OfferSerializer(serializers.ModelSerializer):
-    owner = UserForOfferSerializer()
-    offering = ListingForOffersSerializer()
-    offer_for = ListingForOffersSerializer()
-    owner_id = serializers.ReadOnlyField(source='owner.id')
+    # cant get this to work as a read only field
+    # owner = UserForOfferSerializer()
+    # offering = ListingForOffersSerializer()
+    # offer_for = ListingForOffersSerializer()
+
+    offering_id = serializers.IntegerField(source='offering.id')
+    offer_for_id = serializers.IntegerField(source='offer_for.id')
+    owner_id = serializers.IntegerField(source='owner.id')
 
     class Meta:
         model = Offer
-        fields = ['id', 'offering', 'offer_for', 'owner_id', 'owner', 'status']
+        read_only_fields = ['owner', 'offering', 'offer_for']
+        fields = ['id', 'owner_id', 'status', 'offering_id', 'offer_for_id', 'owner_id']
 
