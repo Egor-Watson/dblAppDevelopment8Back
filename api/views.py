@@ -25,7 +25,18 @@ class ListingList(generics.ListCreateAPIView):
 
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
 
-    queryset = Listing.objects.all()
+
+
+    def get_queryset(self):
+        queryset = Listing.objects.all()
+
+        owner_id = self.request.query_params.get('owner_id')
+
+        if owner_id is not None:
+            queryset = queryset.filter(owner_id=owner_id)
+
+        return queryset
+
     serializer_class = ListingSerializer
 
 
@@ -83,7 +94,18 @@ class OfferList(generics.ListCreateAPIView):
 
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
 
-    queryset = Offer.objects.all()
+    def get_queryset(self):
+        queryset = Offer.objects.all()
+
+        offered_for = self.request.query_params.get('offered_for')
+
+        if offered_for is not None:
+            queryset = queryset.filter(offer_for=offered_for)
+
+        return queryset
+
+
+
     serializer_class = OfferSerializer
 
 
