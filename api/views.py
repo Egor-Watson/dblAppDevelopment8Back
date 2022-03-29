@@ -33,12 +33,13 @@ class ListingList(generics.ListCreateAPIView):
         owner_id = self.request.query_params.get('owner_id')
 
         # can query for list of ids of Listings
-        pk_list = self.request.query_params.get('pk_list').split(',')
+        pk_list = self.request.query_params.get('pk_list')
 
         if owner_id is not None:
             queryset = queryset.filter(owner_id=owner_id)
 
         if pk_list is not None:
+            pk_list = pk_list.split(',')
             queryset = queryset.filter(pk__in=pk_list)
 
         return queryset
