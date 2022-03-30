@@ -61,12 +61,12 @@ class UserForListingSerializer(serializers.ModelSerializer):
 
 # Serializers from official page:
 class ListingSerializer(serializers.ModelSerializer):
-    owner = UserForListingSerializer()
+    # owner = UserForListingSerializer()
     owner_id = serializers.ReadOnlyField(source='owner.id')
 
     class Meta:
         model = Listing
-        fields = ['id', 'name', 'description', 'category', 'similar_items', 'latitude', 'longitude', 'owner',
+        fields = ['id', 'name', 'description', 'category', 'similar_items', 'latitude', 'longitude',
                   'owner_id', 'image1', 'image2', 'image3', 'image4', 'offers', 'archived', 'featured']
 
 
