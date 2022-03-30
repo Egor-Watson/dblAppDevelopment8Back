@@ -84,6 +84,8 @@ class ListingForOffersSerializer(serializers.ModelSerializer):
         fields = ['id', 'name', 'owner', 'image1']
 
 class OfferSerializer(serializers.ModelSerializer):
+
+    offer_for_owner_id = serializers.ReadOnlyField(source='offer_for.owner.id')
     # cant get this to work as a read only field
     # owner = UserForOfferSerializer()
     # offering = ListingForOffersSerializer()
@@ -109,5 +111,5 @@ class OfferSerializer(serializers.ModelSerializer):
         model = Offer
         # read_only_fields = ['owner', 'offering', 'offer_for']
         # fields = ['id', 'owner_id', 'status', 'offering_id', 'offer_for_id', 'owner_id']
-        fields = ['id', 'owner', 'offering', 'offer_for', 'status']
+        fields = ['id', 'owner', 'offering', 'offer_for', 'status', 'offer_for_owner_id']
 
