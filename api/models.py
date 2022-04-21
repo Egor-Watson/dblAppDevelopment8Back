@@ -8,7 +8,7 @@ class Offer(models.Model):
         ('A', 'Accepted'),
         ('D', 'Declined')
     )
-    # TODO: ensure offering and listings are different
+
     # item offered for a listing
     offering = models.ForeignKey('Listing', on_delete=models.CASCADE)
     offer_for = models.ForeignKey('Listing', on_delete=models.CASCADE, related_name='offerFor_listing')
@@ -21,8 +21,10 @@ class Offer(models.Model):
     def __str__(self):
         return '{} from {}'.format(self.offering.name, self.owner.username)
 
+
 class ExtraUserInformation(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
+    # set flags for user
     is_admin = models.BooleanField(default=False)
     is_reported = models.BooleanField(default=False)
     is_banned = models.BooleanField(default=False)
@@ -42,7 +44,6 @@ class Listing(models.Model):
     # items location
     longitude = models.CharField(max_length=7, blank=True, null=True)
     latitude = models.CharField(max_length=7, blank=True, null=True)
-
 
     owner = models.ForeignKey(User, related_name='listings', on_delete=models.CASCADE)
 
